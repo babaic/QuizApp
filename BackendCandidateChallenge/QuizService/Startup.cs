@@ -8,6 +8,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuizService.Repositories;
 
 namespace QuizService;
 
@@ -23,9 +24,21 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowReactApp",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
+        
         services.AddMvc();
         services.AddSingleton(InitializeDb());
         services.AddControllers();
+        services.AddScoped<IQuizRepository, QuizRepository>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +48,7 @@ public class Startup
         {
             app.UseDeveloperExceptionPage();
         }
+        app.UseCors("AllowReactApp");
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {

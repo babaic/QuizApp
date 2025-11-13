@@ -15,7 +15,10 @@ public class QuizResponseModel
         public int Id { get; set; }
         public string Text { get; set; }
         public IEnumerable<AnswerItem> Answers { get; set; }
+        // Add UserAnswerId so user can actually pick answer from answers
+        public int? UserAnswerId { get; set; }
         public int CorrectAnswerId { get; set; }
+        public int? Score { get; set; }
     }
 
     public long Id { get; set; }

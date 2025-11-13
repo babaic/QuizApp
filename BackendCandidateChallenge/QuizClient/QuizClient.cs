@@ -97,6 +97,7 @@ public class QuizClient
             new Response<object>(response.StatusCode, null, await ReadErrorAsync(response));
     }
 
+    //TODO endpoint not exist, questionResponse defined as empty
     public async Task<Response<Uri>> PostQuizResponseAsync(QuestionResponse questionResponse, int quizId)
     {
         var request =
@@ -124,11 +125,13 @@ public class QuizClient
     }
 }
 
+//TODO would move this out of here to Model
 public struct QuizQuestion
 {
     public string Text { get; set; }
 }
 
+//TODO also move this
 public struct Response<T>
 {
     public Response(HttpStatusCode statusCode, T value, string errorMessage = null)
@@ -143,6 +146,7 @@ public struct Response<T>
     public string ErrorMessage { get; }
 }
 
+//TODO also move this out of here
 public class QuizClientException : HttpRequestException
 {
     public HttpStatusCode ResponseStatusCode { get; }

@@ -27,5 +27,6 @@ CREATE TABLE [QuizResponse](
 	[QuizId] [integer] NOT NULL,
 	[QuestionId] [integer] NOT NULL,
 	[AnswerId] [integer] NOT NULL,
-	[UserId] [integer] NOT NULL
+	[UserId] [integer] NOT NULL,
+    [Score] [integer] NULL
 );
